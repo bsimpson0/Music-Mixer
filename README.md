@@ -1,1 +1,1 @@
-# Capstone
+# Music Mixer Capstone Project
