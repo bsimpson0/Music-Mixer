@@ -11,8 +11,6 @@ const Header = () => {
         <nav>
           <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Create</a></li>
-            <li><a href="#">Discover</a></li>
             <li><a href="#">Community</a></li>
             <li><a href="#">Sign In</a></li>
           </ul>
