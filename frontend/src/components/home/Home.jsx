@@ -1,14 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "../common/SearchBar";
 
 const Home = () => {
+  const [prompt, setPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  
+  const handlePromptChange = (value) => {
+    setPrompt(value);
+  };
+  
+  const handleGenerate = () => {
+    if (prompt.trim() === "") return;
+    setIsGenerating(true);
+    // Here you would connect to your backend API
+    setTimeout(() => {
+      setIsGenerating(false);
+    }, 2000);
+  };
+
   return (
     <>
       <section className="hero">
         <div className="container">
-          <h2>Mix, Match, and Create Amazing Music</h2>
-          <p>Combine elements from different songs to create your own unique musical masterpieces.</p>
-          <SearchBar placeholder="Search for songs, beats, or melodies..." />
+          <h2>AI-Powered Music Creation</h2>
+          <p>Generate unique music with artificial intelligence. Simply describe your desired song, and our AI will create it for you.</p>
+          <div className="prompt-container">
+            <SearchBar 
+              placeholder="Describe the music you want to create!" 
+              onSearch={handleGenerate}
+              onChange={handlePromptChange}
+              value={prompt}
+            />
+            <button 
+              className="btn btn-primary generate-btn" 
+              onClick={handleGenerate}
+              disabled={isGenerating || prompt.trim() === ""}
+            >
+              {isGenerating ? "Generating..." : "Generate Music"}
+            </button>
+          </div>
         </div>
       </section>
       
@@ -16,102 +46,65 @@ const Home = () => {
         <div className="container">
           <div className="section-title">
             <h3>How It Works</h3>
-            <p>Creating your own music has never been easier. Follow these simple steps to get started.</p>
+            <p>Creating AI-generated music has never been easier.</p>
           </div>
           
           <div className="feature-grid">
             <div className="feature-card">
-              <div className="feature-icon">🎵</div>
-              <h4>Find Tracks</h4>
-              <p>Search our vast library of songs and musical elements to find the perfect pieces for your creation.</p>
+              <div className="feature-icon">💭</div>
+              <h4>Describe Your Vision</h4>
+              <p>Enter a detailed prompt describing the style, mood, tempo, and instruments for your desired music.</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">✂️</div>
-              <h4>Select Elements</h4>
-              <p>Choose specific parts like chorus, verses, beats, or melodies from different songs to mix together.</p>
+              <div className="feature-icon">🤖</div>
+              <h4>AI Generation</h4>
+              <p>Our advanced machine learning model analyzes your prompt and creates a unique musical composition.</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">🔄</div>
-              <h4>Combine & Adjust</h4>
-              <p>Our AI-powered mixer will seamlessly blend your selected elements, matching tempo and key.</p>
+              <div className="feature-icon">🎧</div>
+              <h4>Listen & Refine</h4>
+              <p>Preview your generated music and make adjustments to further refine the sound to your liking.</p>
             </div>
-            
-            <div className="feature-card">
-              <div className="feature-icon">💾</div>
-              <h4>Save & Share</h4>
-              <p>Save your creation to your profile and share it with the community or download for personal use.</p>
-            </div>
+
           </div>
         </div>
       </section>
 
-      <section className="mixer-section">
+      <section className="generation-demo">
         <div className="container">
           <div className="section-title">
-            <h3>Music Mixer Studio</h3>
-            <p>Drag and drop elements to create your unique mix</p>
+            <h3>Generation Studio</h3>
+            <p>Try out our AI music generation with these example prompts</p>
           </div>
           
-          <div className="mixer-container">
-            <div className="tracks">
-              <div className="track">
-                <div className="track-type">Chorus</div>
-                <div className="track-info">
-                  <div className="track-title">Dreaming of Tomorrow</div>
-                  <div className="track-artist">Starlight Symphony</div>
-                </div>
-                <div className="track-actions">
-                  <button className="track-btn">▶️</button>
-                  <button className="track-btn">✖️</button>
-                </div>
-              </div>
-              
-              <div className="track">
-                <div className="track-type">Beat</div>
-                <div className="track-info">
-                  <div className="track-title">Urban Pulse</div>
-                  <div className="track-artist">Rhythm Collective</div>
-                </div>
-                <div className="track-actions">
-                  <button className="track-btn">▶️</button>
-                  <button className="track-btn">✖️</button>
-                </div>
-              </div>
-              
-              <div className="track">
-                <div className="track-type">Verse</div>
-                <div className="track-info">
-                  <div className="track-title">Midnight Thoughts</div>
-                  <div className="track-artist">Luna Voice</div>
-                </div>
-                <div className="track-actions">
-                  <button className="track-btn">▶️</button>
-                  <button className="track-btn">✖️</button>
-                </div>
-              </div>
+          <div className="prompt-examples">
+            <div className="prompt-card" onClick={() => setPrompt("A lo-fi hip hop beat with jazzy piano samples and rain sounds")}>
+              <p>"A lo-fi hip hop beat with jazzy piano samples and rain sounds"</p>
             </div>
             
+            <div className="prompt-card" onClick={() => setPrompt("An energetic EDM track with a heavy drop and futuristic synths")}>
+              <p>"An energetic EDM track with a heavy drop and futuristic synths"</p>
+            </div>
+            
+            <div className="prompt-card" onClick={() => setPrompt("A gentle acoustic guitar melody with nature sounds")}>
+              <p>"A gentle acoustic guitar melody with nature sounds"</p>
+            </div>
+          </div>
+          
+          <div className="player-section">
             <div className="waveform">
               <div className="waveform-graphic">
-                {/* Simplified waveform representation */}
                 {[...Array(20)].map((_, index) => (
                   <div key={index} className="wave-bar"></div>
                 ))}
               </div>
             </div>
             
-            <div className="mixer-controls">
-              <button className="btn btn-primary">Generate Mix</button>
-              <div>
-                <button className="btn btn-secondary">Save Mix</button>
-                <button className="btn btn-secondary">Share</button>
-              </div>
-            </div>
-            
-            <div className="add-track">
-              <button className="btn btn-secondary">+ Add Another Track</button>
+            <div className="player-controls">
+              <button className="btn btn-primary">▶ Play Latest Generation</button>
+              <button className="btn btn-secondary">Download</button>
             </div>
           </div>
         </div>
@@ -120,71 +113,71 @@ const Home = () => {
       <section className="gallery">
         <div className="container">
           <div className="section-title">
-            <h3>Popular User Mixes</h3>
-            <p>Discover what other music lovers have created</p>
+            <h3>Community Creations</h3>
+            <p>Explore music created by our AI based on community prompts</p>
           </div>
           
           <div className="popular-mixes">
             <div className="mix-card">
               <div className="mix-img">
-                <img src="/placeholder.jpg" alt="Mix thumbnail" />
+                <img src="/placeholder.jpg" alt="Waveform visualization" />
                 <div className="play-icon">▶️</div>
               </div>
               <div className="mix-details">
-                <h4 className="mix-title">Chillwave Summer</h4>
-                <div className="mix-creator">By MusicMaster92</div>
+                <h4 className="mix-title">Cyberpunk City Ambience</h4>
+                <div className="mix-creator">Prompt by TechnoVerse</div>
                 <div className="mix-tags">
-                  <span className="mix-tag">Pop</span>
                   <span className="mix-tag">Electronic</span>
-                  <span className="mix-tag">Chill</span>
+                  <span className="mix-tag">Ambient</span>
+                  <span className="mix-tag">Futuristic</span>
                 </div>
               </div>
             </div>
             
             <div className="mix-card">
               <div className="mix-img">
-                <img src="/placeholder.jpg" alt="Mix thumbnail" />
+                <img src="/placeholder.jpg" alt="Waveform visualization" />
                 <div className="play-icon">▶️</div>
               </div>
               <div className="mix-details">
-                <h4 className="mix-title">Urban Jazz Fusion</h4>
-                <div className="mix-creator">By JazzLover2000</div>
+                <h4 className="mix-title">Rainy Jazz Café</h4>
+                <div className="mix-creator">Prompt by MelodyMaster</div>
                 <div className="mix-tags">
                   <span className="mix-tag">Jazz</span>
-                  <span className="mix-tag">Hip Hop</span>
-                  <span className="mix-tag">Fusion</span>
+                  <span className="mix-tag">Lo-Fi</span>
+                  <span className="mix-tag">Relaxing</span>
                 </div>
               </div>
             </div>
             
             <div className="mix-card">
               <div className="mix-img">
-                <img src="/placeholder.jpg" alt="Mix thumbnail" />
+                <img src="/placeholder.jpg" alt="Waveform visualization" />
                 <div className="play-icon">▶️</div>
               </div>
               <div className="mix-details">
-                <h4 className="mix-title">Rock Ballad Remix</h4>
-                <div className="mix-creator">By GuitarHero77</div>
+                <h4 className="mix-title">Epic Fantasy Battle</h4>
+                <div className="mix-creator">Prompt by OrchestralDreams</div>
                 <div className="mix-tags">
-                  <span className="mix-tag">Rock</span>
-                  <span className="mix-tag">Ballad</span>
-                  <span className="mix-tag">Acoustic</span>
+                  <span className="mix-tag">Orchestral</span>
+                  <span className="mix-tag">Epic</span>
+                  <span className="mix-tag">Fantasy</span>
                 </div>
               </div>
             </div>
             
             <div className="mix-card">
               <div className="mix-img">
-                <img src="/placeholder.jpg" alt="Mix thumbnail" />
+                <img src="/placeholder.jpg" alt="Waveform visualization" />
                 <div className="play-icon">▶️</div>
               </div>
               <div className="mix-details">
-                <h4 className="mix-title">EDM Mashup</h4>
-                <div className="mix-creator">By BeatDropper</div>
+                <h4 className="mix-title">Retro Synthwave Drive</h4>
+                <div className="mix-creator">Prompt by NeonRider</div>
                 <div className="mix-tags">
-                  <span className="mix-tag">EDM</span>
-                  <span className="mix-tag">Dance</span>
-                  <span className="mix-tag">Bass</span>
+                  <span className="mix-tag">Synthwave</span>
+                  <span className="mix-tag">Retro</span>
+                  <span className="mix-tag">80s</span>
                 </div>
               </div>
             </div>
