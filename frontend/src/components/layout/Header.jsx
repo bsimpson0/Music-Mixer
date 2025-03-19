@@ -11,8 +11,9 @@ const Header = () => {
         <nav>
           <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Sign In</a></li>
+            <li><a href="#">Song Generation</a></li>
+            <li><a href="#">Lyric Generation</a></li>
+            <li><a href="#">Generated Catalog</a></li>
           </ul>
         </nav>
       </div>
