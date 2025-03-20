@@ -57,6 +57,24 @@ body {
   opacity: 0.9;
 }
 
+/* Lyric Cards */
+.mix-card-lyric {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: var(--dark);
+  padding: 1px;
+  background: linear-gradient(to bottom, var(--lyric-primary-dark), var(--dark));
+}
+
+/* Inner content container to maintain dark background */
+.mix-card-lyric-content {
+  background-color: var(--dark);
+  border-radius: 11px;
+  padding: 16px;
+  height: 100%;
+}
 
 /* Header Styles */
 header {

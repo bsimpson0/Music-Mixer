@@ -152,73 +152,109 @@ function LyricGeneration() {
                 For now, they're static examples to show the UI design */}
             
             {/* Example 1 - Chillwave */}
-            <div className="mix-card">
-                <div className="mix-img">
-                    <img src="/placeholder.jpg" alt="Waveform visualization" />
-                    <div className="play-icon">▶️</div>
-                </div>
+            <div className="mix-card-lyric">
+              <div className="mix-card-lyric-content">
                 <div className="mix-details">
                     <h4 className="mix-title">Ocean Breeze Chillwave</h4>
                     <div className="mix-creator">Prompt by SonicFlow</div>
                     <div className="mix-tags">
-                    <span className="mix-tag">Chillwave</span>
-                    <span className="mix-tag">Relaxing</span>
-                    <span className="mix-tag">Ambient</span>
+                        <span className="mix-tag">Chillwave</span>
+                        <span className="mix-tag">Relaxing</span>
+                        <span className="mix-tag">Ambient</span>
                     </div>
                 </div>
+                <div className="lyrics-container">
+                    <h5>Lyrics</h5>
+                    <div className="lyrics-text">
+                        <p>This is where the lyrics for Ocean Breeze Chillwave would appear.</p>
+                        <p>Each line or verse could be formatted in its own paragraph.</p>
+                    </div>
                 </div>
+                {/* If we want to add download function */}
+                {/*<div className="player-controls">
+                    <button className="download-button">↓ Download</button>
+                </div>*/}
+              </div>
+            </div>
 
                 {/* Example 2 - Indie Rock */}
-                <div className="mix-card">
-                <div className="mix-img">
-                    <img src="/placeholder.jpg" alt="Waveform visualization" />
-                    <div className="play-icon">▶️</div>
-                </div>
-                <div className="mix-details">
-                    <h4 className="mix-title">Golden Hour Indie Jam</h4>
-                    <div className="mix-creator">Prompt by IndieDreamer</div>
-                    <div className="mix-tags">
-                    <span className="mix-tag">Indie</span>
-                    <span className="mix-tag">Rock</span>
-                    <span className="mix-tag">Upbeat</span>
+                <div className="mix-card-lyric">
+                  <div className="mix-card-lyric-content">
+                    <div className="mix-details">
+                        <h4 className="mix-title">Golden Hour Indie Jam</h4>
+                        <div className="mix-creator">Prompt by IndieDreamer</div>
+                        <div className="mix-tags">
+                          <span className="mix-tag">Indie</span>
+                          <span className="mix-tag">Rock</span>
+                          <span className="mix-tag">Upbeat</span>
+                        </div>
                     </div>
-                </div>
+                    <div className="lyrics-container">
+                    <h5>Lyrics</h5>
+                    <div className="lyrics-text">
+                        <p>This is where the lyrics for Golden Hour Indie Jam would appear.</p>
+                        <p>Each line or verse could be formatted in its own paragraph.</p>
+                    </div>
+                    </div>
+                    {/* If we want to add download function */}
+                    {/*<div className="player-controls">
+                        <button className="download-button">↓ Download</button>
+                    </div>*/}
+                  </div>
                 </div>
 
                 {/* Example 3 - Synth Pop */}
-                <div className="mix-card">
-                <div className="mix-img">
-                    <img src="/placeholder.jpg" alt="Waveform visualization" />
-                    <div className="play-icon">▶️</div>
-                </div>
-                <div className="mix-details">
-                    <h4 className="mix-title">Starlight Synth Pop</h4>
-                    <div className="mix-creator">Prompt by NeonPulse</div>
-                    <div className="mix-tags">
-                    <span className="mix-tag">Synth Pop</span>
-                    <span className="mix-tag">Retro</span>
-                    <span className="mix-tag">Dance</span>
+                <div className="mix-card-lyric">
+                  <div className="mix-card-lyric-content">
+                    <div className="mix-details">
+                        <h4 className="mix-title">Starlight Synth Pop</h4>
+                        <div className="mix-creator">Prompt by NeonPulse</div>
+                        <div className="mix-tags">
+                        <span className="mix-tag">Synth Pop</span>
+                        <span className="mix-tag">Retro</span>
+                        <span className="mix-tag">Dance</span>
+                        </div>
                     </div>
-                </div>
+                    <div className="lyrics-container">
+                    <h5>Lyrics</h5>
+                    <div className="lyrics-text">
+                        <p>This is where the lyrics for Starlight Synth Pop would appear.</p>
+                        <p>Each line or verse could be formatted in its own paragraph.</p>
+                    </div>
+                    </div>
+                    {/* If we want to add download function */}
+                    {/*<div className="player-controls">
+                        <button className="download-button">↓ Download</button>
+                    </div>*/}
+                  </div>
                 </div>
 
                 {/* Example 4 - Acoustic Folk */}
-                <div className="mix-card">
-                <div className="mix-img">
-                    <img src="/placeholder.jpg" alt="Waveform visualization" />
-                    <div className="play-icon">▶️</div>
-                </div>
-                <div className="mix-details">
-                    <h4 className="mix-title">Sunset Acoustic Ballad</h4>
-                    <div className="mix-creator">Prompt by FolkVibes</div>
-                    <div className="mix-tags">
-                    <span className="mix-tag">Acoustic</span>
-                    <span className="mix-tag">Folk</span>
-                    <span className="mix-tag">Mellow</span>
+                <div className="mix-card-lyric">
+                  <div className="mix-card-lyric-content">
+                    <div className="mix-details">
+                        <h4 className="mix-title">Sunset Acoustic Ballad</h4>
+                        <div className="mix-creator">Prompt by FolkVibes</div>
+                        <div className="mix-tags">
+                        <span className="mix-tag">Acoustic</span>
+                        <span className="mix-tag">Folk</span>
+                        <span className="mix-tag">Mellow</span>
+                        </div>
                     </div>
-                </div>
+                    <div className="lyrics-container">
+                      <h5>Lyrics</h5>
+                      <div className="lyrics-text">
+                          <p>This is where the lyrics for Sunset Acoustic Ballad would appear.</p>
+                          <p>Each line or verse could be formatted in its own paragraph.</p>
+                      </div>
+                    </div>
+                    {/* If we want to add download function */}
+                    {/*<div className="player-controls">
+                        <button className="download-button">↓ Download</button>
+                    </div>*/}
+                  </div>
+              </div>
             </div>
-          </div>
         </div>
       </section>
       </>
