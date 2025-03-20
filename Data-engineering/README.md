@@ -46,19 +46,30 @@ ffmpeg is used to convert the audio signal of the .wav files to 16kHz mono as th
 3. Run improve_metadata.py to enhance metadata quality
 4. Run uptoS3.py to upload dataset to AWS S3
 
+
 ### Installing Dependencies
 ```bash
 pip install torch==2.6.0+cu124
 pip install boto3==1.37.13
 pip install yt-dlp==2025.02.19
 pip install essentia==2.1b6.dev1110
-pip install demucs==4.0.1 
+pip install demucs==4.0.1
 
-### Roadmap
-- Use this dataset to fine-tune the music generation model
-- Make additional tweaks to the dataset after our first training run is complete
-- Address potential issues:
-  - Limited variety of instruments and moods in song chunks
-  - Chunks shorter than 15 seconds may prevent Music Gen from learning meaningful patterns
-  - Short chunks may need to be removed in subsequent training runs
-- Consider adding additional songs to improve dataset diversity and quality
+Roadmap
+
+Use this dataset to fine-tune the music generation model
+
+Make additional tweaks to the dataset after our first training run is complete
+
+Address potential issues:
+
+Limited variety of instruments and moods in song chunks
+
+Chunks shorter than 15 seconds may prevent Music Gen from learning meaningful patterns
+
+Short chunks may need to be removed in subsequent training runs
+
+Consider adding additional songs to improve dataset diversity and quality
+
+
+
