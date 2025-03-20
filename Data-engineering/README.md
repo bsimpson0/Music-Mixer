@@ -27,6 +27,14 @@ in order to do that we needed to create our own dataset from scratch. Below is t
 - AWS SDK boto3(python3) 1.37.13
 - I have used a placeholder for our bucket name for security reasons this can be seen in the scripts songs_analyzer.py, improve_metadata.py, uptoS3.py, process_music.py
 
+### Roadmap
+- Use this dataset to fine-tune the music generation model
+- Make additional tweaks to the dataset after our first training run is complete
+- Address potential issues:
+  - Limited variety of instruments and moods in song chunks
+  - Chunks shorter than 15 seconds may prevent Music Gen from learning meaningful patterns
+  - Short chunks may need to be removed in subsequent training runs
+- Consider adding additional songs to improve dataset diversity and quality
 
 ### Project Structure
 
@@ -54,22 +62,6 @@ pip install boto3==1.37.13
 pip install yt-dlp==2025.02.19
 pip install essentia==2.1b6.dev1110
 pip install demucs==4.0.1
-
-Roadmap
-
-Use this dataset to fine-tune the music generation model
-
-Make additional tweaks to the dataset after our first training run is complete
-
-Address potential issues:
-
-Limited variety of instruments and moods in song chunks
-
-Chunks shorter than 15 seconds may prevent Music Gen from learning meaningful patterns
-
-Short chunks may need to be removed in subsequent training runs
-
-Consider adding additional songs to improve dataset diversity and quality
 
 
 
