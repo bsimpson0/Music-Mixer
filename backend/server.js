@@ -1,8 +1,16 @@
 // server.js - The main entry point for the MusicMixer API backend
 // Express is the web framework that handles routing and middleware
 const express = require('express');
+const { OpenAI } = require('openai');
+require('dotenv').config({path: './config/.env'});
+
 const app = express();
-const PORT = process.env.PORT || 3001; // I changed from 5000 since that port was already in use on my computer
+const PORT = process.env.PORT
+
+// Initialize OpenAI with API key
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
 // This middleware automatically parses JSON request bodies into JavaScript objects
 // Without this, I'd have to manually parse the JSON from my frontend requests
@@ -23,14 +31,12 @@ app.get('/', (req, res) => {
   res.send('MusicMixer API is running');
 });
 
-// This is my main endpoint that will eventually connect to my AI music generation model
-// It accepts a text prompt and will return generated music
-app.post('/api/generate', (req, res) => {
+// New endpoint for lyric generation with OpenAI
+app.post('/api/generate-lyrics', async (req, res) => {
   // Extract the prompt from the request body
-  const { prompt } = req.body; 
+  const { prompt } = req.body;
   
   // Validate that a prompt was actually provided
-  // This prevents errors from missing input data
   if (!prompt) {
     return res.status(400).json({
       success: false,
@@ -38,15 +44,69 @@ app.post('/api/generate', (req, res) => {
     });
   }
   
-  // Log the prompt for my debugging purposes
-  // This helps me see what's being requested while I'm developing
-  console.log('Received generation request with prompt:', prompt);
+  console.log('Received lyric generation request with prompt:', prompt);
   
-  // TODO: Replace this with actual AI model integration
-  // - AWS SageMaker endpoint
+  try {
+    // Call OpenAI API for lyric generation
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo", // You can use "gpt-4" if you have access
+      messages: [
+        { 
+          role: "system", 
+          content: "You are a professional songwriter who specializes in writing lyrics. Create original song lyrics based on the user's description. Format the lyrics with clear verse and chorus sections."
+        },
+        { 
+          role: "user", 
+          content: `Write song lyrics based on this description: ${prompt}`
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 500
+    });
+    
+    // Extract the generated lyrics
+    const lyrics = response.choices[0].message.content.trim();
+    
+    res.status(200).json({
+      success: true,
+      data: {
+        id: 'lyric_' + Date.now(),
+        lyrics: lyrics,
+        prompt: prompt
+      },
+      message: 'Lyrics generated successfully'
+    });
+  } catch (error) {
+    console.error('Error generating lyrics:', error);
+    
+    res.status(500).json({
+      success: false,
+      message: 'Error generating lyrics',
+      error: error.message
+    });
+  }
+});
+
+// Update this endpoint to work with the chat interface
+// This endpoint will eventually connect to your music generation model
+app.post('/api/generate', (req, res) => {
+  // Extract the prompt and lyrics from the request body
+  const { prompt, lyrics } = req.body; 
+  
+  // Validate that a prompt was actually provided
+  if (!prompt) {
+    return res.status(400).json({
+      success: false,
+      message: 'Prompt is required'
+    });
+  }
+  
+  // Log the prompt for debugging purposes
+  console.log('Received music generation request with prompt:', prompt);
+  console.log('Using lyrics:', lyrics ? lyrics.substring(0, 100) + '...' : 'No lyrics provided');
   
   // For now, I'm just simulating a response with a delay
-  // This helps me test loading states in my frontend
+  // This helps test loading states in the frontend
   setTimeout(() => {
     res.status(200).json({
       success: true,
@@ -60,26 +120,9 @@ app.post('/api/generate', (req, res) => {
   }, 2000); // 2 second delay simulates processing time
 });
 
-// TODO: Add endpoint to retrieve previously generated music
-// app.get('/api/generations/:id', (req, res) => {
-//   // This will fetch a specific generation by ID
-// });
-
-// TODO: Add endpoint to list recent generations
-// app.get('/api/generations', (req, res) => {
-//   // This will return a list of recent generations
-// });
-
 // Start my Express server and listen for incoming requests
-// The callback function runs once the server is successfully started
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Test the API at http://localhost:${PORT}/`);
+  console.log(`OpenAI API status: ${process.env.OPENAI_API_KEY ? 'Configured' : 'Missing API key! Check your .env file'}`);
 });
-
-// Future improvements:
-// 1. Add error handling middleware to catch and process errors consistently
-// 2. Add request logging for all API calls
-// 3. Implement rate limiting to prevent abuse
-// 4. Add authentication if user accounts are implemented
-// 5. Set up environment variables for configuration
